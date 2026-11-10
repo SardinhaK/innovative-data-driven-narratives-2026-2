@@ -173,7 +173,7 @@ const ESTADIO = {
 const ACHADOS = {
   r1: { valor: "R$ 240 bi", rotulo: "movimentados em apostas pelas famílias brasileiras em 2024",
         fonte: "Banco Central, citado no Dossiê IEPS (2025)" },
-  r2: { valor: "R$ 1,14 bi", rotulo: "das bets nos 20 clubes da Série A em 2025, 7,9% do faturamento deles",
+  r2: { valor: "R$ 1,14 bi", rotulo: "das bets nos 20 clubes da Série A em 2025, quase 8% do faturamento de R$ 14,9 bi",
         fonte: "Terra (set/2026)" },
   r3: { valor: "53%", rotulo: "das pessoas de 9 a 17 anos viram publicidade de apostas na internet",
         fonte: "TIC Kids Online 2025 (Cetic.br), citado no Dossiê IEPS" },

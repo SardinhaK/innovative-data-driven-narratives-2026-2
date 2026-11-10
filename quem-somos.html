@@ -37,7 +37,7 @@
     <p>Usamos ironia só contra o sistema das bets, nunca contra quem aposta. Tratamos a dependência como questão de saúde pública. As marcas BET X, BET Y e BET Z das ilustrações são fictícias.</p>
 
     <h2>Como citar</h2>
-    <p><span class="pendente">[NOMES DA EQUIPE]</span>. <i>Da Sorte ao Declínio: dossiê das bets no futebol</i>. Recife: UFPE/CAC, 2026. Disponível em: <span id="url-site"></span>.</p>
+    <p id="citacao"><i>Da Sorte ao Declínio: dossiê das bets no futebol</i>. Recife: UFPE/CAC, 2026. Disponível em: <span id="url-site"></span>.</p>
   </div>
 </main>
 <script src="assets/js/mapa-narrativo.js"></script>
@@ -48,9 +48,18 @@ iniciarComum();
 document.getElementById('equipe').innerHTML = PROJETO.equipe.map(p => {
   const r = p.rep && MAPA.reportagens.find(x => x.id === p.rep);
   const funcao = r ? 'Texto e reportagem · Reportagem ' + r.numero : p.funcao;
-  return '<li><span class="nome">' + esc(p.nome) + '</span><span class="legenda">' + esc(p.curso) + '</span><span>' + pend(funcao) + '</span></li>';
+  const cargo = funcao && !/^\[/.test(funcao) ? '<span>' + pend(funcao) + '</span>' : '';
+  return '<li><span class="nome">' + esc(p.nome) + '</span><span class="legenda">' + esc(p.curso) + '</span>' + cargo + '</li>';
 }).join('');
-document.getElementById('orientacao').innerHTML = pend(PROJETO.creditos.find(([f]) => f === 'Orientação')[1]);
+const orientacao = PROJETO.creditos.find(([f]) => f === 'Orientação')[1];
+const blocoOrientacao = document.getElementById('orientacao');
+if (/^\[/.test(orientacao)) {
+  blocoOrientacao.hidden = true;
+  blocoOrientacao.previousElementSibling.hidden = true;
+} else blocoOrientacao.innerHTML = pend(orientacao);
+const nomes = PROJETO.equipe.map(p => p.nome);
+const citacao = document.getElementById('citacao');
+citacao.insertAdjacentText('afterbegin', (nomes.length > 1 ? nomes.slice(0, -1).join(', ') + ' e ' + nomes[nomes.length - 1] : nomes[0]) + '. ');
 document.getElementById('semestre').innerHTML = pend(PROJETO.semestre);
 document.getElementById('url-site').innerHTML = '<a href="' + esc(PROJETO.site) + '">' + esc(PROJETO.site) + '</a>';
 /* Links das instituições: os endereços ficam em assets/js/mapa-narrativo.js (PROJETO.links) */
